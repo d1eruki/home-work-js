@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>home-work-js</title>
+</head>
+<body>
+<div class="content">
+    <h1 class="fw-1">
+        Туду
+    </h1>
+    <div class="flex width-max">
+        <input class="width-max mr-1" id="toDoInput" type="text">
+        <button onclick="toDoAdd()">Добавить</button>
+    </div>
+    <div class="width-max" id="toDoOutput"></div>
+</div>
+
+<div class="content">
+    <h1 class="fw-1">
+        Калькулятор
+    </h1>
+    <div class="flex width-max">
+        <button onclick="displayClear()">очистить</button>
+        <input class="ml-1 width-max" disabled id="display" type="text">
+        <div class="ml-1 d-none" id="result"></div>
+    </div>
+    <div class="flex gap-1">
+        <button onclick="displayAppend('1')">1</button>
+        <button onclick="displayAppend('2')">2</button>
+        <button onclick="displayAppend('3')">3</button>
+        <button onclick="displayAppend('4')">4</button>
+        <button onclick="displayAppend('5')">5</button>
+        <button onclick="displayAppend('6')">6</button>
+        <button onclick="displayAppend('7')">7</button>
+        <button onclick="displayAppend('8')">8</button>
+        <button onclick="displayAppend('9')">9</button>
+        <button onclick="displayAppend('+')">+</button>
+        <button onclick="displayAppend('-')">-</button>
+        <button onclick="displayAppend('*')">*</button>
+        <button onclick="displayAppend('/')">/</button>
+        <button onclick="calculate('=')">=</button>
+    </div>
+</div>
+<div class="content">
+    <h1 class="fw-1">
+        Сравнение
+    </h1>
+    <div class="flex width-max">
+        <input class="mr-1 width-max" id="compareOne" type="text" value="1000">
+        <div id="check"></div>
+        <input class="ml-1 width-max" id="compareTwo" type="text" value="1000">
+    </div>
+</div>
+</body>
+</html>

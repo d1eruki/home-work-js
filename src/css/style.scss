@@ -1,0 +1,87 @@
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  font-weight: 100;
+  height: 100vh;
+  background-color: black;
+  color: white;
+  font-size: 1.5em;
+  display: grid;
+  grid-template-columns: max-content;
+  gap: 1rem;
+  margin: 0;
+  padding: 1rem;
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+#toDoOutput {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.width-max {
+  width: 100%;
+}
+
+.fw-1 {
+  font-weight: 100;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.border-none {
+  border: none;
+}
+
+.radius-10 {
+}
+
+.gap-1 {
+  gap: 1rem;
+}
+
+.d-none {
+  display: none;
+}
+
+input[type="text"] {
+  height: 60px;
+  font-size: 1.5em;
+  text-align: right;
+  padding: 0;
+  border-radius: 10px;
+  border: none;
+}
+
+.mr-1 {
+  margin-right: 1rem;
+}
+
+.ml-1 {
+  margin-left: 1rem;
+}
+
+
+input[type="checkbox" i] {
+  width: 30px;
+  height: 30px;
+  margin: 0;
+}
+
+button {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  border: none;
+}
