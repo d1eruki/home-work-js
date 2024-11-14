@@ -2,54 +2,66 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>home-work-js</title>
 </head>
 <body>
-<div class="content">
-    <h1 class="fw-1">
-        Туду
-    </h1>
-    <div class="flex width-max">
-        <input class="width-max mr-1" id="toDoInput" type="text">
-        <button onclick="toDoAdd()">Добавить</button>
+<div class="container mt-5">
+    <div class="mb-5">
+        <h1 class="font-weight-bold">
+            ✏️ To Do List
+        </h1>
+        <h6 class="font-italic">
+            Добавь сюда пару делишек, что бы организовать свой супер занятой день, ковбой
+        </h6>
+        <div class="input-group mb-3">
+            <input aria-label="ToDo" class="form-control" id="toDoInput" placeholder="Добавь меня" type="text">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" onclick="toDoAdd()" type="button">Добавить</button>
+            </div>
+        </div>
+        <div class="width-max" id="toDoOutput"></div>
     </div>
-    <div class="width-max" id="toDoOutput"></div>
-</div>
 
-<div class="content">
-    <h1 class="fw-1">
-        Калькулятор
-    </h1>
-    <div class="flex width-max">
-        <button onclick="displayClear()">очистить</button>
-        <input class="ml-1 width-max" disabled id="display" type="text">
+    <div class="mb-5">
+        <h1 class="font-weight-bold">
+            🧮 Калькулятор
+        </h1>
+        <div class="input-group mb-3">
+            <input aria-label="Calc" class="form-control" disabled id="display" placeholder="Тут могли бы быть ваши цифры" type="text">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" onclick="displayClear()" type="button">Очистить</button>
+            </div>
+        </div>
         <div class="ml-1 d-none" id="result"></div>
+        <div class="flex gap-1">
+            <button class="btn btn-outline-secondary" onclick="displayAppend('1')" type="button">1</button>
+            <button class="btn btn-outline-secondary" onclick="displayAppend('2')" type="button">2</button>
+            <button class="btn btn-outline-secondary" onclick="displayAppend('3')" type="button">3</button>
+            <button class="btn btn-outline-secondary" onclick="displayAppend('4')" type="button">4</button>
+            <button class="btn btn-outline-secondary" onclick="displayAppend('5')" type="button">5</button>
+            <button class="btn btn-outline-secondary" onclick="displayAppend('6')" type="button">6</button>
+            <button class="btn btn-outline-secondary" onclick="displayAppend('7')" type="button">7</button>
+            <button class="btn btn-outline-secondary" onclick="displayAppend('8')" type="button">8</button>
+            <button class="btn btn-outline-secondary" onclick="displayAppend('9')" type="button">9</button>
+            <button class="btn btn-outline-secondary" onclick="displayAppend('0')" type="button">0</button>
+            <button class="btn btn-outline-secondary" onclick="displayAppend('+')" type="button">+</button>
+            <button class="btn btn-outline-secondary" onclick="displayAppend('-')" type="button">-</button>
+            <button class="btn btn-outline-secondary" onclick="displayAppend('*')" type="button">*</button>
+            <button class="btn btn-outline-secondary" onclick="displayAppend('/')" type="button">/</button>
+            <button class="btn btn-outline-secondary" onclick="calculate('=')" type="button">=</button>
+        </div>
     </div>
-    <div class="flex gap-1">
-        <button onclick="displayAppend('1')">1</button>
-        <button onclick="displayAppend('2')">2</button>
-        <button onclick="displayAppend('3')">3</button>
-        <button onclick="displayAppend('4')">4</button>
-        <button onclick="displayAppend('5')">5</button>
-        <button onclick="displayAppend('6')">6</button>
-        <button onclick="displayAppend('7')">7</button>
-        <button onclick="displayAppend('8')">8</button>
-        <button onclick="displayAppend('9')">9</button>
-        <button onclick="displayAppend('+')">+</button>
-        <button onclick="displayAppend('-')">-</button>
-        <button onclick="displayAppend('*')">*</button>
-        <button onclick="displayAppend('/')">/</button>
-        <button onclick="calculate('=')">=</button>
-    </div>
-</div>
-<div class="content">
-    <h1 class="fw-1">
-        Сравнение
-    </h1>
-    <div class="flex width-max">
-        <input class="mr-1 width-max" id="compareOne" type="text" value="1000">
-        <div id="check"></div>
-        <input class="ml-1 width-max" id="compareTwo" type="text" value="1000">
+
+    <div class="mb-5">
+        <h1 class="font-weight-bold">
+            📤 Сравнение
+        </h1>
+        <div class="d-flex align-items-center">
+            <input aria-label="Compare" class="form-control" id="compareOne" type="text" value="1000">
+            <div id="check">✅</div>
+            <input aria-label="Compare" class="form-control" id="compareTwo" type="text" value="1000">
+        </div>
     </div>
 </div>
 </body>
