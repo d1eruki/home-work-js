@@ -18,9 +18,14 @@
             <input aria-label="ToDo" class="form-control" id="toDoInput" placeholder="Добавь меня" type="text">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" onclick="toDoAdd()" type="button">Добавить</button>
+                <button class="btn btn-outline-secondary" onclick="clearLocal()" type="button">Очистить</button>
             </div>
         </div>
-        <div class="width-max" id="toDoOutput"></div>
+        <div class="grid-table" id="toDoOutput">
+            <div class="header text-muted">Готовность</div>
+            <div class="header text-muted">Задача</div>
+        </div>
+
     </div>
 
     <div class="mb-5">

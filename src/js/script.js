@@ -1,29 +1,44 @@
 import '../css/style.scss';
 
-function toDoAdd() {
+function toDoAdd(key) {
     const toDoInputElement = document.getElementById("toDoInput");
     const toDoOutputElement = document.getElementById("toDoOutput");
 
     const toDoInput = toDoInputElement.value.trim();
     if (!toDoInput) return;
 
-    const newLabel = document.createElement("label");
-    newLabel.style.display = "flex";
-    newLabel.style.alignItems= "center";
-
     const newCheckbox = document.createElement("input");
     newCheckbox.type = "checkbox";
     newCheckbox.checked = false;
-    newCheckbox.style.marginRight= "1rem";
 
-    newLabel.append(newCheckbox);
-    newLabel.append(" " + toDoInput);
-    toDoOutputElement.append(newLabel);
+    const newRowCheckbox = document.createElement("div");
+    newRowCheckbox.classList.add('cell-input');
+
+    const newRowTask = document.createElement("div");
+    newRowTask.classList.add('cell');
+
+    newRowCheckbox.append(newCheckbox);
+    newRowTask.append(toDoInput);
+
+    localStorage.setItem('newCheckbox', 'toDoInput');
+
+    const localItems = localStorage.getItem('newRowTask');
+
+    toDoOutputElement.append(localItems, newRowCheckbox, newRowTask);
     toDoInputElement.value = '';
 }
 
+window.toDoAdd = toDoAdd;
+
 //////////////////////////////////////////////
 
+function clearLocal() {
+    localStorage.clear();
+}
+
+window.clearLocal = clearLocal;
+
+//////////////////////////////////////////////
 
 function displayClear() {
     document.getElementById('display').value = '';
@@ -38,12 +53,16 @@ function calculate() {
     let result = document.getElementById("result");
 
     result.textContent = '';
-    result.style.display= "flex";
+    result.style.display = "flex";
 
     result.textContent = eval(display.value);
 
     display.value = '';
 }
+
+window.displayClear = displayClear;
+window.displayAppend = displayAppend;
+window.calculate = calculate;
 
 //////////////////////////////////////////////
 
@@ -72,14 +91,4 @@ inputElementTwo.addEventListener("input", (event) => {
     compareValues();
 });
 
-//////////////////////////////////////////////
-
-function hideLeft() {
-    const element = document.getElementById("left");
-    element.style.display = (element.style.display === 'none') ? '' : 'none';
-}
-
-function hideRight() {
-    const element = document.getElementById("right");
-    element.style.display = (element.style.display === 'none') ? '' : 'none';
-}
+window.compareValues = compareValues;

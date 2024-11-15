@@ -1,11 +1,10 @@
-@import "~bootstrap/scss/bootstrap";
+@use "~bootstrap/scss/bootstrap";
 
 .gap-1 {
   gap: 1rem;
 }
 
-#toDoOutput {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.grid-table {
+  display: grid;
+  grid-template-columns: 10% auto;
 }
