@@ -1,15 +1,16 @@
 const toDoInputElement = document.getElementById("toDoInput");
 const toDoOutputElement = document.getElementById("toDoOutput");
 
-window.onload = () => {
+document.addEventListener("DOMContentLoaded", function () {
     const storedData = localStorage.getItem('storedData');
 
-    toDoOutputElement.append(storedData);
-};
+    if (storedData !== null) {
+        toDoOutputElement.append(storedData);
+    }
+});
 
 function toDoAdd() {
     const toDoInput = toDoInputElement.value.trim();
-    if (!toDoInput) return;
 
     const newLabel = document.createElement("label");
     newLabel.classList.add('grid-table');
@@ -18,6 +19,11 @@ function toDoAdd() {
     const newCheckbox = document.createElement("input");
     newCheckbox.type = "checkbox";
     newCheckbox.checked = false;
+
+    const getImportance = document.getElementById("importance");
+    const newImportance = document.createElement("span");
+    newImportance.classList.add('text-center');
+    newImportance.textContent = getImportance.textContent.trim();
 
     const newSpan = document.createElement("span");
 
@@ -43,19 +49,21 @@ function toDoAdd() {
 
     newSpan.append(toDoInput);
     newBtnSpan.append(newBtnEdit, newBtnDel);
-    newLabel.append(newCheckbox, newSpan, newBtnSpan);
+    newLabel.append(newCheckbox, newImportance, newSpan, newBtnSpan);
 
     toDoOutputElement.append(newLabel);
 
     const storedData = {
         id: newLabel.id,
         done: newCheckbox.checked,
+        importance: newImportance.textContent,
         task: toDoInput,
     };
 
     localStorage.setItem("storedData", JSON.stringify(storedData));
 
     toDoInputElement.value = '';
+    getImportance.textContent = 'Важность';
 }
 
 window.toDoAdd = toDoAdd;
@@ -73,3 +81,19 @@ function toDoEdit() {
 }
 
 window.toDoEdit = toDoEdit;
+
+function selectImportance() {
+    let importance = this.textContent.trim();
+    const importantOutput = document.getElementById("importance");
+
+    importantOutput.textContent = importance;
+}
+
+window.selectImportance = selectImportance;
+
+function clearStorage() {
+    localStorage.clear();
+    window.location.reload();
+}
+
+window.clearStorage = clearStorage;

@@ -6,7 +6,7 @@
 
 .grid-table {
   display: grid;
-  grid-template-columns: minmax(min-content, 100px) auto minmax(min-content, 100px);
+  grid-template-columns: minmax(min-content, 100px) 100px auto minmax(min-content, 100px);
   align-items: center;
   line-break: anywhere;
 }
