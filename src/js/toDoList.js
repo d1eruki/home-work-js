@@ -23,7 +23,7 @@ function toDoAdd() {
     const getImportance = document.getElementById("importance");
     const newImportance = document.createElement("span");
     newImportance.classList.add('text-center');
-    newImportance.textContent = getImportance.textContent.trim();
+    newImportance.textContent = Array.from(getImportance.textContent.trim())[0];
 
     const newSpan = document.createElement("span");
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>home-work-js</title>
+    <title>✏️ To Do List</title>
     <script defer src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </head>
@@ -14,7 +14,7 @@
             ✏️ To Do List
         </h1>
         <h6 class="font-italic">
-            Добавь сюда пару делишек, что бы организовать свой супер занятой день, братишка
+            Добавь сюда пару делишек, что бы организовать свой день, братишка
         </h6>
         <div id="toDoOutput">
             <div class="grid-table rounded-top bg-light">
@@ -33,21 +33,21 @@
                 </span>
             </label>
         </div>
+        <button class="btn btn-outline-secondary" onclick="clearStorage()" type="button">Очистить</button>
     </div>
     <div class="input-group">
         <div class="input-group-prepend">
             <button id="importance" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Важность</button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="#" onclick="selectImportance.call(this)">🔴</a>
-                <a class="dropdown-item" href="#" onclick="selectImportance.call(this)">🟠</a>
-                <a class="dropdown-item" href="#" onclick="selectImportance.call(this)">🟡</a>
-                <a class="dropdown-item" href="#" onclick="selectImportance.call(this)">🟢</a>
+                <a class="dropdown-item" href="#" onclick="selectImportance.call(this)">🔴 Критически важно</a>
+                <a class="dropdown-item" href="#" onclick="selectImportance.call(this)">🟠 Средне важно</a>
+                <a class="dropdown-item" href="#" onclick="selectImportance.call(this)">🟡 Не очень важно</a>
+                <a class="dropdown-item" href="#" onclick="selectImportance.call(this)">🟢 Совсем не важно</a>
             </div>
         </div>
         <input aria-label="ToDo" class="form-control" id="toDoInput" placeholder="Добавь меня" type="text">
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" onclick="toDoAdd()" type="button">Добавить</button>
-            <button class="btn btn-outline-secondary" onclick="clearStorage()" type="button">Очистить</button>
         </div>
     </div>
 </div>

@@ -19,7 +19,7 @@
 label {
   margin-bottom: 0;
 
-  input[type="checkbox"]:checked + span {
+  input[type="checkbox"]:checked + span + span {
     text-decoration: line-through;
   }
 
