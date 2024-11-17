@@ -6,8 +6,8 @@
     <title>home-work-js</title>
 </head>
 <body>
-<div class="container mt-5">
-    <div class="mb-5 p-4 d-flex flex-column gap-1 bg-light rounded-lg">
+<div class="container d-flex vh-100 flex-column justify-content-between py-5">
+    <div class="d-flex flex-column gap-1 rounded-lg">
         <h1 class="font-weight-bold">
             ✏️ To Do List
         </h1>
@@ -18,20 +18,23 @@
             <div class="grid-table rounded-top bg-light">
                 <div class="header text-muted grid-table-title text-center">Готовность</div>
                 <div class="header text-muted grid-table-title">Задача</div>
-                <div class="header text-muted grid-table-title text-center">Удалить</div>
+                <div class="header text-muted grid-table-title text-center">Действия</div>
             </div>
             <label class="grid-table">
                 <input aria-label="Checkbox" type="checkbox">
                 <span>Добавить новых задач</span>
-                <button class="btn cell" onclick="toDoDelete()" type="button">❌</button>
+                <span class="d-flex">
+                    <button class="btn cell" onclick="toDoDelete()" type="button">✍🏼</button>
+                    <button class="btn cell" onclick="toDoEdit()" type="button">❌</button>
+                </span>
             </label>
         </div>
-        <div class="input-group">
-            <input aria-label="ToDo" class="form-control" id="toDoInput" placeholder="Добавь меня" type="text">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" onclick="toDoAdd()" type="button">Добавить</button>
-                <button class="btn btn-outline-secondary" onclick="clearLocal()" type="button">Очистить</button>
-            </div>
+    </div>
+    <div class="input-group">
+        <input aria-label="ToDo" class="form-control" id="toDoInput" placeholder="Добавь меня" type="text">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" onclick="toDoAdd()" type="button">Добавить</button>
+            <button class="btn btn-outline-secondary" onclick="clearLocal()" type="button">Очистить</button>
         </div>
     </div>
 </div>

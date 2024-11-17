@@ -14,21 +14,29 @@ function toDoAdd() {
 
     const newSpan = document.createElement("span");
 
-    const newDeleteBtn = document.createElement("button");
-    newDeleteBtn.classList.add('btn');
-    newDeleteBtn.classList.add('cell');
-    newDeleteBtn.type = "button";
-    newDeleteBtn.onclick = function () {
+    const newBtnSpan = document.createElement("span");
+
+    const newBtnDel = document.createElement("button");
+    newBtnDel.classList.add('btn');
+    newBtnDel.classList.add('cell');
+    newBtnDel.type = "button";
+    newBtnDel.onclick = function () {
         toDoDelete();
     };
-    newDeleteBtn.textContent = '❌';
+    newBtnDel.textContent = '❌';
+    
+    const newBtnEdit = document.createElement("button");
+    newBtnEdit.classList.add('btn');
+    newBtnEdit.classList.add('cell');
+    newBtnEdit.type = "button";
+    newBtnEdit.onclick = function () {
+        toDoEdit();
+    };
+    newBtnEdit.textContent = '✍🏼';
 
     newSpan.append(toDoInput);
-    newLabel.append(newCheckbox, newSpan, newDeleteBtn);
-
-    // localStorage.setItem('newCheckbox', toDoInput);
-
-    const localItems = localStorage.getItem('newRowTask');
+    newBtnSpan.append(newBtnEdit, newBtnDel);
+    newLabel.append(newCheckbox, newSpan, newBtnSpan);
 
     toDoOutputElement.append(newLabel);
     toDoInputElement.value = '';
@@ -43,8 +51,9 @@ function toDoDelete() {
 
 window.toDoDelete = toDoDelete;
 
-/*function clearLocal() {
-    localStorage.clear();
+function toDoEdit() {
+    const element = this.parentNode;
+    element.remove();
 }
 
-window.clearLocal = clearLocal;*/
+window.toDoEdit = toDoEdit;
