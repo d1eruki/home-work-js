@@ -1,12 +1,19 @@
-function toDoAdd() {
-    const toDoInputElement = document.getElementById("toDoInput");
-    const toDoOutputElement = document.getElementById("toDoOutput");
+const toDoInputElement = document.getElementById("toDoInput");
+const toDoOutputElement = document.getElementById("toDoOutput");
 
+window.onload = () => {
+    const storedData = localStorage.getItem('storedData');
+
+    toDoOutputElement.append(storedData);
+};
+
+function toDoAdd() {
     const toDoInput = toDoInputElement.value.trim();
     if (!toDoInput) return;
 
     const newLabel = document.createElement("label");
     newLabel.classList.add('grid-table');
+    newLabel.id = Math.random().toString(16).slice(2);
 
     const newCheckbox = document.createElement("input");
     newCheckbox.type = "checkbox";
@@ -24,7 +31,7 @@ function toDoAdd() {
         toDoDelete();
     };
     newBtnDel.textContent = '❌';
-    
+
     const newBtnEdit = document.createElement("button");
     newBtnEdit.classList.add('btn');
     newBtnEdit.classList.add('cell');
@@ -39,6 +46,15 @@ function toDoAdd() {
     newLabel.append(newCheckbox, newSpan, newBtnSpan);
 
     toDoOutputElement.append(newLabel);
+
+    const storedData = {
+        id: newLabel.id,
+        done: newCheckbox.checked,
+        task: toDoInput,
+    };
+
+    localStorage.setItem("storedData", JSON.stringify(storedData));
+
     toDoInputElement.value = '';
 }
 
@@ -46,7 +62,7 @@ window.toDoAdd = toDoAdd;
 
 function toDoDelete() {
     const element = this.parentNode;
-    element.remove();
+    element.localStorage.removeItem('storedData');
 }
 
 window.toDoDelete = toDoDelete;
