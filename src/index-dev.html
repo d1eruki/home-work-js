@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="mb-5">
+    <h1 class="font-weight-bold">
+        🧮 Калькулятор
+    </h1>
+    <div class="input-group mb-3">
+        <input aria-label="Calc" class="form-control" disabled id="display" placeholder="Тут могли бы быть ваши цифры"
+               type="text">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" onclick="displayClear()" type="button">Очистить</button>
+        </div>
+    </div>
+    <div class="flex gap-1">
+        <button class="btn btn-outline-secondary" onclick="displayAppend('1')" type="button">1</button>
+        <button class="btn btn-outline-secondary" onclick="displayAppend('2')" type="button">2</button>
+        <button class="btn btn-outline-secondary" onclick="displayAppend('3')" type="button">3</button>
+        <button class="btn btn-outline-secondary" onclick="displayAppend('4')" type="button">4</button>
+        <button class="btn btn-outline-secondary" onclick="displayAppend('5')" type="button">5</button>
+        <button class="btn btn-outline-secondary" onclick="displayAppend('6')" type="button">6</button>
+        <button class="btn btn-outline-secondary" onclick="displayAppend('7')" type="button">7</button>
+        <button class="btn btn-outline-secondary" onclick="displayAppend('8')" type="button">8</button>
+        <button class="btn btn-outline-secondary" onclick="displayAppend('9')" type="button">9</button>
+        <button class="btn btn-outline-secondary" onclick="displayAppend('0')" type="button">0</button>
+        <button class="btn btn-outline-secondary" onclick="displayAppend('+')" type="button">+</button>
+        <button class="btn btn-outline-secondary" onclick="displayAppend('-')" type="button">-</button>
+        <button class="btn btn-outline-secondary" onclick="displayAppend('*')" type="button">*</button>
+        <button class="btn btn-outline-secondary" onclick="displayAppend('/')" type="button">/</button>
+        <button class="btn btn-outline-secondary" onclick="calculate('=')" type="button">=</button>
+    </div>
+</div>
+
+<div class="mb-5">
+    <h1 class="font-weight-bold">
+        📤 Сравнение
+    </h1>
+    <div class="d-flex align-items-center">
+        <input aria-label="Compare" class="form-control" id="compareOne" type="text" value="1000">
+        <div id="check">✅</div>
+        <input aria-label="Compare" class="form-control" id="compareTwo" type="text" value="1000">
+    </div>
+</div>
+</body>
+</html>

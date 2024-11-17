@@ -6,5 +6,24 @@
 
 .grid-table {
   display: grid;
-  grid-template-columns: 10% auto;
+  grid-template-columns: minmax(min-content, 100px) auto minmax(min-content, 100px);
+  align-items: center;
+  line-break: anywhere;
+}
+
+.grid-table-title {
+  border-bottom: 1px solid #ced4da;
+  padding: .5rem 0;
+}
+
+label {
+  margin-bottom: 0;
+
+  input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+  }
+
+  &:hover {
+    background-color: #e9ecef;
+  }
 }
