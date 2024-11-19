@@ -2,10 +2,10 @@ const toDoInputElement = document.getElementById("toDoInput");
 const toDoOutputElement = document.getElementById("toDoOutput");
 
 document.addEventListener("DOMContentLoaded", function () {
-    const storedData = localStorage.getItem('storedData');
+    const storedDataAppend = localStorage.getItem('storedData');
 
-    if (storedData !== null) {
-        toDoOutputElement.append(storedData);
+    if (storedDataAppend !== null) {
+        toDoOutputElement.append(storedDataAppend);
     }
 });
 
@@ -53,14 +53,23 @@ function toDoAdd() {
 
     toDoOutputElement.append(newLabel);
 
-    const storedData = {
+    let storedData = JSON.parse(localStorage.getItem('storedData'));
+
+    const newData = {
         id: newLabel.id,
         done: newCheckbox.checked,
         importance: newImportance.textContent,
         task: toDoInput,
     };
 
+    if (storedData !== null) {
+        storedData.push(newData);
+    } else {
+        storedData = [];
+    }
+
     localStorage.setItem("storedData", JSON.stringify(storedData));
+    console.log(storedData);
 
     toDoInputElement.value = '';
     getImportance.textContent = 'Важность';
