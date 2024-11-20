@@ -2,10 +2,28 @@ const toDoInputElement = document.getElementById("toDoInput");
 const toDoOutputElement = document.getElementById("toDoOutput");
 
 document.addEventListener("DOMContentLoaded", function () {
-    const storedDataAppend = localStorage.getItem('storedData');
+    const storedDataAppend = JSON.parse(localStorage.getItem('storedData'));
+    console.log(storedDataAppend);
 
     if (storedDataAppend !== null) {
-        toDoOutputElement.append(storedDataAppend);
+        for (let i = 0; i < storedDataAppend.length; i++) {
+            const itemData = storedDataAppend[i];
+
+            const item = document.createElement('label');
+            item.classList.add('grid-table');
+
+            item.innerHTML = `
+                <input aria-label="Checkbox" type="checkbox" ${itemData.done === 'Yes' ? 'checked' : ''}/>
+                <span class="text-center">${itemData.importance}</span>
+                <span>${itemData.task}</span>
+                <span class="d-flex">
+                    <button class="btn cell" onclick="toDoDelete()" type="button">✍🏼</button>
+                    <button class="btn cell" onclick="toDoEdit()" type="button">❌</button>
+                </span>
+            `;
+
+            toDoOutputElement.append(item);
+        }
     }
 });
 
