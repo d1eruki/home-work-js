@@ -2,6 +2,20 @@ const toDoInputElement = document.querySelector("#toDoInput");
 const toDoOutputElement = document.querySelector("#toDoOutput");
 let storedData = JSON.parse(localStorage.getItem('storedData')) || [];
 
+function createItem(itemData) {
+    return `
+        <label class="grid-table" id="${itemData.id}">
+            <input aria-label="Checkbox" type="checkbox" ${itemData.done === 'Yes' ? 'checked' : ''}/>
+            <span class="text-center">${itemData.importance}</span>
+            <span>${itemData.task}</span>
+            <span class="d-flex">
+                <button class="btn cell" id="toDoDelete" type="button">✍🏼</button>
+                <button class="btn cell" id="toDoEdit" type="button">❌</button>
+            </span>
+        </label>
+    `;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 
     if (storedData.length === 0) {
@@ -11,75 +25,36 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let i = 0; i < storedData.length; i++) {
         const itemData = storedData[i];
 
-        const item = `
-            <label class="grid-table id=${itemData.id}">
-                <input aria-label="Checkbox" type="checkbox" ${itemData.done === 'Yes' ? 'checked' : ''}/>
-                <span class="text-center">${itemData.importance}</span>
-                <span>${itemData.task}</span>
-                <span class="d-flex">
-                    <button class="btn cell" id="toDoDelete" type="button">✍🏼</button>
-                    <button class="btn cell" id="toDoEdit" type="button">❌</button>
-                </span>
-            </label>
-        `;
-
-        toDoOutputElement.innerHTML += item;
+        toDoOutputElement.innerHTML += createItem(itemData);
     }
 });
 
 document.querySelector("#toDoAddBtn").addEventListener('click', function () {
     const toDoInput = toDoInputElement.value.trim();
 
-    const newLabel = document.createElement("label");
-    newLabel.classList.add('grid-table');
-    newLabel.id = Math.random().toString(16).slice(2);
+    const id = Math.random().toString(16).slice(2);
 
     const newCheckbox = document.createElement("input");
     newCheckbox.type = "checkbox";
     newCheckbox.checked = false;
 
-    const getImportance = document.querySelector("#importance");
-    const newImportance = document.createElement("span");
-    newImportance.classList.add('text-center');
-    newImportance.textContent = Array.from(getImportance.textContent.trim())[0];
+    const Importance = document.querySelector("#importance")
 
-    const newSpan = document.createElement("span");
-
-    const newBtnSpan = document.createElement("span");
-
-    const newBtnDel = document.createElement("button");
-    newBtnDel.classList.add('btn');
-    newBtnDel.classList.add('cell');
-    newBtnDel.id = 'toDoDelete';
-    newBtnDel.type = "button";
-    newBtnDel.textContent = '❌';
-
-    const newBtnEdit = document.createElement("button");
-    newBtnEdit.classList.add('btn');
-    newBtnEdit.classList.add('cell');
-    newBtnDel.id = 'toDoEdit';
-    newBtnEdit.type = "button";
-    newBtnEdit.textContent = '✍🏼';
-
-    newSpan.append(toDoInput);
-    newBtnSpan.append(newBtnEdit, newBtnDel);
-    newLabel.append(newCheckbox, newImportance, newSpan, newBtnSpan);
-
-    toDoOutputElement.append(newLabel);
-
-    const newData = {
-        id: newLabel.id,
+    const itemData = {
+        id: id,
         done: newCheckbox.checked,
-        importance: newImportance.textContent,
+        importance: Importance.textContent.trim()[0],
         task: toDoInput,
     };
 
-    storedData.push(newData);
+    toDoOutputElement.innerHTML += createItem(itemData);
+
+    storedData.push(itemData);
 
     localStorage.setItem("storedData", JSON.stringify(storedData));
 
     toDoInputElement.value = '';
-    getImportance.textContent = 'Важность';
+    Importance.textContent = 'Важность';
 });
 
 document.querySelector("#toDoDelete").addEventListener('click', function () {
