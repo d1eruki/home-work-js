@@ -1,20 +1,18 @@
 const toDoInputElement = document.querySelector("#toDoInput");
 const toDoOutputElement = document.querySelector("#toDoOutput");
+let storedData = JSON.parse(localStorage.getItem('storedData')) || [];
 
 document.addEventListener("DOMContentLoaded", function () {
-    const storedDataAppend = JSON.parse(localStorage.getItem('storedData'));
 
-    if (storedDataAppend == null) {
-        return
+    if (storedData.length === 0) {
+        localStorage.setItem("storedData", JSON.stringify([]));
     }
 
-    for (let i = 0; i < storedDataAppend.length; i++) {
-        const itemData = storedDataAppend[i];
+    for (let i = 0; i < storedData.length; i++) {
+        const itemData = storedData[i];
 
-        const item = document.createElement('label');
-        item.classList.add('grid-table');
-
-        item.innerHTML = `
+        const item = `
+            <label class="grid-table id=${itemData.id}">
                 <input aria-label="Checkbox" type="checkbox" ${itemData.done === 'Yes' ? 'checked' : ''}/>
                 <span class="text-center">${itemData.importance}</span>
                 <span>${itemData.task}</span>
@@ -22,9 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     <button class="btn cell" id="toDoDelete" type="button">✍🏼</button>
                     <button class="btn cell" id="toDoEdit" type="button">❌</button>
                 </span>
-            `;
+            </label>
+        `;
 
-        toDoOutputElement.append(item);
+        toDoOutputElement.innerHTML += item;
     }
 });
 
@@ -68,8 +67,6 @@ document.querySelector("#toDoAddBtn").addEventListener('click', function () {
 
     toDoOutputElement.append(newLabel);
 
-    let storedData = JSON.parse(localStorage.getItem('storedData'));
-
     const newData = {
         id: newLabel.id,
         done: newCheckbox.checked,
@@ -77,18 +74,13 @@ document.querySelector("#toDoAddBtn").addEventListener('click', function () {
         task: toDoInput,
     };
 
-    if (storedData !== null) {
-        storedData.push(newData);
-    } else {
-        storedData = [];
-    }
+    storedData.push(newData);
 
     localStorage.setItem("storedData", JSON.stringify(storedData));
 
     toDoInputElement.value = '';
     getImportance.textContent = 'Важность';
 });
-
 
 document.querySelector("#toDoDelete").addEventListener('click', function () {
     const element = this.parentNode;
