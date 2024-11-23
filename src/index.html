@@ -26,26 +26,28 @@
                 <span class="text-center">🔴</span>
                 <span>Добавить новых задач</span>
                 <span class="d-flex">
-                    <button class="btn cell" onclick="toDoDelete()" type="button">✍🏼</button>
-                    <button class="btn cell" onclick="toDoEdit()" type="button">❌</button>
+                    <button class="btn cell" id="toDoDelete" type="button">✍🏼</button>
+                    <button class="btn cell" id="toDoEdit" type="button">❌</button>
                 </span>
             </label>
         </div>
-        <button class="btn btn-outline-secondary" onclick="clearStorage()" type="button">Очистить</button>
+        <button class="btn btn-outline-secondary" id="clearStorage" type="button">Очистить</button>
     </div>
     <div class="input-group">
         <div class="input-group-prepend">
-            <button id="importance" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Важность</button>
+            <button aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown"
+                    id="importance" type="button">Важность
+            </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="#" onclick="selectImportance.call(this)">🔴 Критически важно</a>
-                <a class="dropdown-item" href="#" onclick="selectImportance.call(this)">🟠 Средне важно</a>
-                <a class="dropdown-item" href="#" onclick="selectImportance.call(this)">🟡 Не очень важно</a>
-                <a class="dropdown-item" href="#" onclick="selectImportance.call(this)">🟢 Совсем не важно</a>
+                <button class="js-importance-btn dropdown-item">🔴 Критически важно</button>
+                <button class="js-importance-btn dropdown-item">🟠 Средне важно</button>
+                <button class="js-importance-btn dropdown-item">🟡 Не очень важно</button>
+                <button class="js-importance-btn dropdown-item">🟢 Совсем не важно</button>
             </div>
         </div>
         <input aria-label="ToDo" class="form-control" id="toDoInput" placeholder="Добавь меня" type="text">
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary" onclick="toDoAdd()" type="button">Добавить</button>
+            <button class="btn btn-outline-secondary" id="toDoAddBtn" type="button">Добавить</button>
         </div>
     </div>
 </div>

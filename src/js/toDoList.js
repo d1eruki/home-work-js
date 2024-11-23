@@ -1,5 +1,5 @@
-const toDoInputElement = document.getElementById("toDoInput");
-const toDoOutputElement = document.getElementById("toDoOutput");
+const toDoInputElement = document.querySelector("#toDoInput");
+const toDoOutputElement = document.querySelector("#toDoOutput");
 
 document.addEventListener("DOMContentLoaded", function () {
     const storedDataAppend = JSON.parse(localStorage.getItem('storedData'));
@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 <span class="text-center">${itemData.importance}</span>
                 <span>${itemData.task}</span>
                 <span class="d-flex">
-                    <button class="btn cell" onclick="toDoDelete()" type="button">✍🏼</button>
-                    <button class="btn cell" onclick="toDoEdit()" type="button">❌</button>
+                    <button class="btn cell" id="toDoDelete" type="button">✍🏼</button>
+                    <button class="btn cell" id="toDoEdit" type="button">❌</button>
                 </span>
             `;
 
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-function toDoAdd() {
+document.querySelector("#toDoAddBtn").addEventListener('click', function () {
     const toDoInput = toDoInputElement.value.trim();
 
     const newLabel = document.createElement("label");
@@ -39,7 +39,7 @@ function toDoAdd() {
     newCheckbox.type = "checkbox";
     newCheckbox.checked = false;
 
-    const getImportance = document.getElementById("importance");
+    const getImportance = document.querySelector("#importance");
     const newImportance = document.createElement("span");
     newImportance.classList.add('text-center');
     newImportance.textContent = Array.from(getImportance.textContent.trim())[0];
@@ -51,19 +51,15 @@ function toDoAdd() {
     const newBtnDel = document.createElement("button");
     newBtnDel.classList.add('btn');
     newBtnDel.classList.add('cell');
+    newBtnDel.id = 'toDoDelete';
     newBtnDel.type = "button";
-    newBtnDel.onclick = function () {
-        toDoDelete();
-    };
     newBtnDel.textContent = '❌';
 
     const newBtnEdit = document.createElement("button");
     newBtnEdit.classList.add('btn');
     newBtnEdit.classList.add('cell');
+    newBtnDel.id = 'toDoEdit';
     newBtnEdit.type = "button";
-    newBtnEdit.onclick = function () {
-        toDoEdit();
-    };
     newBtnEdit.textContent = '✍🏼';
 
     newSpan.append(toDoInput);
@@ -91,36 +87,26 @@ function toDoAdd() {
 
     toDoInputElement.value = '';
     getImportance.textContent = 'Важность';
-}
+});
 
-window.toDoAdd = toDoAdd;
 
-function toDoDelete() {
+document.querySelector("#toDoDelete").addEventListener('click', function () {
     const element = this.parentNode;
     element.localStorage.removeItem('storedData');
-}
+});
 
-window.toDoDelete = toDoDelete;
-
-function toDoEdit() {
+document.querySelector("#toDoEdit").addEventListener('click', function () {
     const element = this.parentNode;
     element.remove();
-}
+});
 
-window.toDoEdit = toDoEdit;
+document.querySelectorAll('.js-importance-btn').forEach(btn => {
+    btn.addEventListener('click', function (event) {
+        document.querySelector("#importance").textContent = event.target.textContent.trim();
+    });
+});
 
-function selectImportance() {
-    let importance = this.textContent.trim();
-    const importantOutput = document.getElementById("importance");
-
-    importantOutput.textContent = importance;
-}
-
-window.selectImportance = selectImportance;
-
-function clearStorage() {
+document.querySelector("#clearStorage").addEventListener('click', function () {
     localStorage.clear();
     window.location.reload();
-}
-
-window.clearStorage = clearStorage;
+});
