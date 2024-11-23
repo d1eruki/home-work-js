@@ -53,7 +53,7 @@ document.querySelector("#toDoAddBtn").addEventListener('click', function () {
     localStorage.setItem("storedData", JSON.stringify(storedData));
 
     inputTask.value = '';
-    importance.textContent = 'Важность';
+    importance.textContent = '🟢 Совсем не важно';
 
     document.querySelector("#toDoDelete").addEventListener('click', function () {
         const element = this.parentNode;
