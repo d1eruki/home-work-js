@@ -1,5 +1,6 @@
-const toDoInputElement = document.querySelector("#toDoInput");
-const toDoOutputElement = document.querySelector("#toDoOutput");
+const inputTask = document.querySelector("#inputTask");
+const outputElement = document.querySelector("#toDoOutput");
+const importance = document.querySelector("#importance")
 let storedData = JSON.parse(localStorage.getItem('storedData')) || [];
 
 function createItem(itemData) {
@@ -22,15 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("storedData", JSON.stringify([]));
     }
 
-    for (let i = 0; i < storedData.length; i++) {
-        const itemData = storedData[i];
-
-        toDoOutputElement.innerHTML += createItem(itemData);
-    }
+    storedData.forEach(itemData => {
+        outputElement.innerHTML += createItem(itemData);
+    })
 });
 
 document.querySelector("#toDoAddBtn").addEventListener('click', function () {
-    const toDoInput = toDoInputElement.value.trim();
+    const toDoInput = inputTask.value.trim();
 
     const id = Math.random().toString(16).slice(2);
 
@@ -38,23 +37,21 @@ document.querySelector("#toDoAddBtn").addEventListener('click', function () {
     newCheckbox.type = "checkbox";
     newCheckbox.checked = false;
 
-    const Importance = document.querySelector("#importance")
-
     const itemData = {
         id: id,
         done: newCheckbox.checked,
-        importance: Importance.textContent.trim()[0],
+        importance: importance.textContent.trim()[0],
         task: toDoInput,
     };
 
-    toDoOutputElement.innerHTML += createItem(itemData);
+    outputElement.innerHTML += createItem(itemData);
 
     storedData.push(itemData);
 
     localStorage.setItem("storedData", JSON.stringify(storedData));
 
-    toDoInputElement.value = '';
-    Importance.textContent = 'Важность';
+    inputTask.value = '';
+    importance.textContent = 'Важность';
 });
 
 document.querySelector("#toDoDelete").addEventListener('click', function () {
@@ -67,9 +64,9 @@ document.querySelector("#toDoEdit").addEventListener('click', function () {
     element.remove();
 });
 
-document.querySelectorAll('.js-importance-btn').forEach(btn => {
+document.querySelectorAll('.importance-btn').forEach(btn => {
     btn.addEventListener('click', function (event) {
-        document.querySelector("#importance").textContent = event.target.textContent.trim();
+        importance.textContent = event.target.textContent.trim();
     });
 });
 
