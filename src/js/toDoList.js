@@ -5,7 +5,7 @@ let storedData = JSON.parse(localStorage.getItem('storedData')) || [];
 
 function createItem(itemData) {
     return `
-        <label class="grid-table" id="${itemData.id}">
+        <label class="grid-table w-100" id="${itemData.id}">
             <input aria-label="Checkbox" type="checkbox" ${itemData.done === 'Yes' ? 'checked' : ''}/>
             <span class="text-center">${itemData.importance}</span>
             <span>${itemData.task}</span>
@@ -21,7 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (storedData.length === 0) {
         localStorage.setItem("storedData", JSON.stringify([]));
-    }
+        outputElement.innerHTML = `
+        <h1>Список дел пуст</h1>
+    `}
 
     storedData.forEach(itemData => {
         outputElement.innerHTML += createItem(itemData);
@@ -40,7 +42,7 @@ document.querySelector("#toDoAddBtn").addEventListener('click', function () {
     const itemData = {
         id: id,
         done: newCheckbox.checked,
-        importance: importance.textContent.trim()[0],
+        importance: Array.from(importance.textContent.trim())[0],
         task: toDoInput,
     };
 
@@ -52,16 +54,18 @@ document.querySelector("#toDoAddBtn").addEventListener('click', function () {
 
     inputTask.value = '';
     importance.textContent = 'Важность';
-});
 
-document.querySelector("#toDoDelete").addEventListener('click', function () {
-    const element = this.parentNode;
-    element.localStorage.removeItem('storedData');
-});
+    document.querySelector("#toDoDelete").addEventListener('click', function () {
+        const element = this.parentNode;
+        element.localStorage.removeItem('storedData');
+    });
 
-document.querySelector("#toDoEdit").addEventListener('click', function () {
-    const element = this.parentNode;
-    element.remove();
+    document.querySelector("#toDoEdit").addEventListener('click', function () {
+        const element = this.parentNode;
+        element.remove();
+    });
+
+    window.location.reload();
 });
 
 document.querySelectorAll('.importance-btn').forEach(btn => {

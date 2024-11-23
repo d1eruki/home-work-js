@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container d-flex vh-100 flex-column justify-content-between py-5">
-    <div class="d-flex flex-column gap-1 rounded-lg">
+    <div class="d-flex flex-column gap-1 rounded-lg h-100">
         <h1 class="font-weight-bold">
             ✏️ To Do List
         </h1>
@@ -15,27 +15,18 @@
             Добавь сюда пару делишек, что бы организовать свой день, братишка!
         </p>
         <div id="toDoOutput">
-            <div class="grid-table rounded-top bg-light">
+            <div class="grid-table rounded-top bg-light w-100">
                 <div class="header text-muted grid-table-title text-center">Готовность</div>
                 <div class="header text-muted grid-table-title text-center">Важность</div>
                 <div class="header text-muted grid-table-title">Задача</div>
                 <div class="header text-muted grid-table-title text-center">Действия</div>
             </div>
-            <label class="grid-table">
-                <input aria-label="Checkbox" type="checkbox">
-                <span class="text-center">🔴</span>
-                <span>Добавить новых задач</span>
-                <span class="d-flex">
-                    <button class="btn cell" id="toDoDelete" type="button">✍🏼</button>
-                    <button class="btn cell" id="toDoEdit" type="button">❌</button>
-                </span>
-            </label>
         </div>
-        <button class="btn btn-outline-secondary" id="clearStorage" type="button">Очистить</button>
     </div>
     <div class="input-group">
         <div class="input-group-prepend">
-            <button aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" id="importance" type="button">Важность
+            <button aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown"
+                    id="importance" type="button">Важность
             </button>
             <div class="dropdown-menu">
                 <button class="importance-btn dropdown-item">🔴 Критически важно</button>
@@ -44,9 +35,10 @@
                 <button class="importance-btn dropdown-item">🟢 Совсем не важно</button>
             </div>
         </div>
-        <input aria-label="ToDo" class="form-control" id="inputTask" placeholder="Добавь меня" type="text">
+        <input aria-label="ToDo" class="form-control" id="inputTask" placeholder="Добавь меня" required type="text">
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" id="toDoAddBtn" type="button">Добавить</button>
+            <button class="btn btn-outline-secondary" id="clearStorage" type="button">Очистить</button>
         </div>
     </div>
 </div>
