@@ -3,16 +3,18 @@ const toDoOutputElement = document.getElementById("toDoOutput");
 
 document.addEventListener("DOMContentLoaded", function () {
     const storedDataAppend = JSON.parse(localStorage.getItem('storedData'));
-    console.log(storedDataAppend);
 
-    if (storedDataAppend !== null) {
-        for (let i = 0; i < storedDataAppend.length; i++) {
-            const itemData = storedDataAppend[i];
+    if (storedDataAppend == null) {
+        return
+    }
 
-            const item = document.createElement('label');
-            item.classList.add('grid-table');
+    for (let i = 0; i < storedDataAppend.length; i++) {
+        const itemData = storedDataAppend[i];
 
-            item.innerHTML = `
+        const item = document.createElement('label');
+        item.classList.add('grid-table');
+
+        item.innerHTML = `
                 <input aria-label="Checkbox" type="checkbox" ${itemData.done === 'Yes' ? 'checked' : ''}/>
                 <span class="text-center">${itemData.importance}</span>
                 <span>${itemData.task}</span>
@@ -22,8 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </span>
             `;
 
-            toDoOutputElement.append(item);
-        }
+        toDoOutputElement.append(item);
     }
 });
 
@@ -87,7 +88,6 @@ function toDoAdd() {
     }
 
     localStorage.setItem("storedData", JSON.stringify(storedData));
-    console.log(storedData);
 
     toDoInputElement.value = '';
     getImportance.textContent = 'Важность';

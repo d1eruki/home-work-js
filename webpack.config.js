@@ -44,4 +44,5 @@ module.exports = {
             filename: 'style.css',
         }),
     ],
+    ignoreWarnings: [/node_modules/]
 };
