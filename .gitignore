@@ -1,2 +1,3 @@
-src/css/*.css.map
-src/css/*.css
+/.idea/
+/dist/
+/node_modules/
