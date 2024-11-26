@@ -8,10 +8,10 @@ function createItem(itemData) {
         <label class="grid-table w-100" id="${itemData.id}">
             <input class="taskCheck" aria-label="Checkbox" type="checkbox" ${itemData.done === true ? "checked" : ""}/>
             <span class="text-center">${itemData.importance}</span>
-            <span>${itemData.task}</span>
+            <span class="task">${itemData.task}</span>
             <span class="d-flex">
-                <button class="btn cell taskEdit" type="button">✍🏼</button>
-                <button class="btn cell taskDelete" type="button">❌</button>
+                <button class="btn taskEdit" type="button">✍🏼</button>
+                <button class="btn taskDelete" type="button">❌</button>
             </span>
         </label>
     `;
@@ -54,17 +54,35 @@ document.querySelector("#toDoAddBtn").addEventListener("click", function () {
 
 outputElement.addEventListener("click", function (event) {
     const target = event.target;
+    const parentLabel = target.closest(".grid-table");
+    const task = parentLabel.querySelector(".task");
+    const taskId = parentLabel.id;
 
     if (target.classList.contains("taskEdit")) {
-        alert("Функция редактирования пока не реализована.");
-    }
+        const taskInput = task.textContent.trim();
+        task.innerHTML = `
+            <div class="input-group">
+                <input class="form-control" id="taskEditInput" placeholder="Добавь меня" required type="text" value="${taskInput}"/>
+            </div>
+        `;
+        target.innerHTML = `✅`;
+        target.classList.add("taskEditDone");
+        target.classList.remove("taskEdit");
+    } else if (target.classList.contains("taskEditDone")) {
+        const taskInput = parentLabel.querySelector('#taskEditInput').value;
 
-    if (target.classList.contains("taskDelete")) {
-        const parentLabel = target.closest(".grid-table");
-        const taskId = parentLabel.id;
+        task.textContent = taskInput;
+
+        const taskIndex = storedData.findIndex(item => item.id === taskId);
+        storedData[taskIndex].task = taskInput;
+
+        localStorage.setItem("storedData", JSON.stringify(storedData));
+        target.innerHTML = `✍🏼`;
+        target.classList.add("taskEdit");
+        target.classList.remove("taskEditDone");
+    } else if (target.classList.contains("taskDelete")) {
 
         parentLabel.remove();
-
         storedData = storedData.filter((item) => item.id !== taskId);
         localStorage.setItem("storedData", JSON.stringify(storedData));
         window.location.reload();
