@@ -4,9 +4,7 @@ const importance = document.querySelector("#importance");
 let storedData = JSON.parse(localStorage.getItem("storedData")) || [];
 
 function createItem(itemData) {
-
     const bgSalad = itemData.done === true ? "bg-salad" : "";
-
     return `
         <label class="grid-table w-100 gap-1 p-1 ${bgSalad}" id="${itemData.id}">
             <input class="taskCheck" aria-label="Checkbox" type="checkbox" ${itemData.done === true ? "checked" : ""}/>
@@ -40,10 +38,8 @@ document.querySelector("#toDoAddBtn").addEventListener("click", function () {
 
     if (!toDoInput) return;
 
-    const id = Math.random().toString(16).slice(2);
-
     const itemData = {
-        id: id,
+        id: Math.random().toString(16).slice(2),
         done: false,
         importance: Array.from(importance.textContent.trim())[0],
         task: toDoInput,
@@ -89,7 +85,7 @@ outputElement.addEventListener("click", function (event) {
     } else if (target.classList.contains("taskDelete")) {
 
         parentLabel.remove();
-        storedData = storedData.filter((item) => item.id !== taskId);
+        storedData = storedData.filter(item => item.id !== taskId);
         localStorage.setItem("storedData", JSON.stringify(storedData));
         window.location.reload();
     }
