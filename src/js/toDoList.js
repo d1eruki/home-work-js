@@ -4,8 +4,11 @@ const importance = document.querySelector("#importance");
 let storedData = JSON.parse(localStorage.getItem("storedData")) || [];
 
 function createItem(itemData) {
+
+    const bgSalad = itemData.done === true ? "bg-salad" : "";
+
     return `
-        <label class="grid-table w-100 gap-1 p-1" id="${itemData.id}">
+        <label class="grid-table w-100 gap-1 p-1 ${bgSalad}" id="${itemData.id}">
             <input class="taskCheck" aria-label="Checkbox" type="checkbox" ${itemData.done === true ? "checked" : ""}/>
             <span class="text-center">${itemData.importance}</span>
             <span class="task">${itemData.task}</span>
@@ -17,7 +20,7 @@ function createItem(itemData) {
     `;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+function updateList() {
     if (storedData.length === 0) {
         localStorage.setItem("storedData", JSON.stringify([]));
         outputElement.innerHTML = `<h2>Список дел пуст</h2>`;
@@ -26,6 +29,10 @@ document.addEventListener("DOMContentLoaded", function () {
             outputElement.innerHTML += createItem(itemData);
         });
     }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    updateList();
 });
 
 document.querySelector("#toDoAddBtn").addEventListener("click", function () {
@@ -49,7 +56,6 @@ document.querySelector("#toDoAddBtn").addEventListener("click", function () {
 
     inputTask.value = "";
     importance.textContent = "🟢 Совсем не важно";
-    window.location.reload();
 });
 
 outputElement.addEventListener("click", function (event) {
@@ -75,8 +81,8 @@ outputElement.addEventListener("click", function (event) {
 
         const taskIndex = storedData.findIndex(item => item.id === taskId);
         storedData[taskIndex].task = taskInput;
-
         localStorage.setItem("storedData", JSON.stringify(storedData));
+
         target.innerHTML = `✍🏼`;
         target.classList.add("taskEdit");
         target.classList.remove("taskEditDone");
@@ -87,6 +93,22 @@ outputElement.addEventListener("click", function (event) {
         localStorage.setItem("storedData", JSON.stringify(storedData));
         window.location.reload();
     }
+});
+
+outputElement.addEventListener("change", function (event) {
+    const target = event.target;
+    const parentLabel = target.closest(".grid-table");
+    const taskId = parentLabel.id;
+
+    if (target.checked === true) {
+        parentLabel.classList.add("bg-salad");
+    } else {
+        parentLabel.classList.remove("bg-salad");
+    }
+
+    const taskIndex = storedData.findIndex(item => item.id === taskId);
+    storedData[taskIndex].done = target.checked;
+    localStorage.setItem("storedData", JSON.stringify(storedData));
 });
 
 document.querySelectorAll(".importance-btn").forEach((btn) => {

@@ -18,11 +18,11 @@
 label {
   margin-bottom: 0;
 
-  input[type="checkbox"]:checked + span + span {
-    text-decoration: line-through;
-  }
-
   &:hover {
     background-color: #e9ecef;
   }
+}
+
+.bg-salad {
+  background-color: #d8ffe6;
 }
