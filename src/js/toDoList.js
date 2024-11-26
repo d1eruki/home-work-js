@@ -5,7 +5,7 @@ let storedData = JSON.parse(localStorage.getItem("storedData")) || [];
 
 function createItem(itemData) {
     return `
-        <label class="grid-table w-100" id="${itemData.id}">
+        <label class="grid-table w-100 gap-1 p-1" id="${itemData.id}">
             <input class="taskCheck" aria-label="Checkbox" type="checkbox" ${itemData.done === true ? "checked" : ""}/>
             <span class="text-center">${itemData.importance}</span>
             <span class="task">${itemData.task}</span>
