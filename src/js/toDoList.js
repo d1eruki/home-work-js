@@ -52,6 +52,7 @@ document.querySelector("#toDoAddBtn").addEventListener("click", function () {
 
     inputTask.value = "";
     importance.textContent = "🟢 Совсем не важно";
+    window.location.reload();
 });
 
 outputElement.addEventListener("click", function (event) {
