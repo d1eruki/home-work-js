@@ -23,6 +23,14 @@ function updateList() {
         localStorage.setItem("storedData", JSON.stringify([]));
         outputElement.innerHTML = `<h2>Список дел пуст</h2>`;
     } else {
+        outputElement.innerHTML = `
+                <div class="grid-table rounded-top bg-light w-100 gap-1 p-1">
+                    <div class="header text-muted grid-table-title text-center">Готовность</div>
+                    <div class="header text-muted grid-table-title text-center">Важность</div>
+                    <div class="header text-muted grid-table-title">Задача</div>
+                    <div class="header text-muted grid-table-title text-center">Действия</div>
+                </div>
+            `;
         storedData.forEach((itemData) => {
             outputElement.innerHTML += createItem(itemData);
         });
@@ -33,35 +41,38 @@ document.addEventListener("DOMContentLoaded", function () {
     updateList();
 });
 
-document.querySelector("#toDoAddBtn").addEventListener("click", function () {
-    const toDoInput = inputTask.value.trim();
-
-    if (!toDoInput) return;
-
-    const itemData = {
-        id: Math.random().toString(16).slice(2),
-        done: false,
-        importance: Array.from(importance.textContent.trim())[0],
-        task: toDoInput,
-    };
-
-    outputElement.innerHTML += createItem(itemData);
-
-    storedData.push(itemData);
-    localStorage.setItem("storedData", JSON.stringify(storedData));
-
-    inputTask.value = "";
-    importance.textContent = "🟢 Совсем не важно";
-    window.location.reload();
-});
-
-outputElement.addEventListener("click", function (event) {
+document.addEventListener("click", function (event) {
     const target = event.target;
     const parentLabel = target.closest(".grid-table");
-    const task = parentLabel.querySelector(".task");
-    const taskId = parentLabel.id;
+    const toDoInput = inputTask ? inputTask.value.trim() : "";
+    const task = parentLabel ? parentLabel.querySelector(".task") : null;
+    const taskId = parentLabel ? parentLabel.id : null;
 
-    if (target.classList.contains("taskEdit")) {
+    if (target.id === "clearStorage") {
+
+        localStorage.clear();
+
+    } else if (target.id === "toDoAddBtn") {
+
+        if (!toDoInput) return;
+
+        const itemData = {
+            id: Math.random().toString(16).slice(2),
+            done: false,
+            importance: Array.from(importance.textContent.trim())[0],
+            task: toDoInput,
+        };
+
+        outputElement.innerHTML += createItem(itemData);
+
+        storedData.push(itemData);
+        localStorage.setItem("storedData", JSON.stringify(storedData));
+
+        inputTask.value = "";
+        importance.textContent = "🟢 Совсем не важно";
+
+    } else if (target.classList.contains("taskEdit")) {
+
         const taskInput = task.textContent.trim();
         task.innerHTML = `
             <div class="input-group">
@@ -71,7 +82,9 @@ outputElement.addEventListener("click", function (event) {
         target.innerHTML = `✅`;
         target.classList.add("taskEditDone");
         target.classList.remove("taskEdit");
+
     } else if (target.classList.contains("taskEditDone")) {
+
         const taskInput = parentLabel.querySelector('#taskEditInput').value;
 
         task.textContent = taskInput;
@@ -83,38 +96,33 @@ outputElement.addEventListener("click", function (event) {
         target.innerHTML = `✍🏼`;
         target.classList.add("taskEdit");
         target.classList.remove("taskEditDone");
+
     } else if (target.classList.contains("taskDelete")) {
 
         parentLabel.remove();
         storedData = storedData.filter(item => item.id !== taskId);
         localStorage.setItem("storedData", JSON.stringify(storedData));
-        window.location.reload();
+
     }
+
 });
 
-outputElement.addEventListener("change", function (event) {
+document.addEventListener("change", function (event) {
     const target = event.target;
     const parentLabel = target.closest(".grid-table");
-    const taskId = parentLabel.id;
+    const taskId = parentLabel ? parentLabel.id : null;
 
-    if (target.checked === true) {
-        parentLabel.classList.add("bg-salad");
-    } else {
-        parentLabel.classList.remove("bg-salad");
+    if (parentLabel) {
+        parentLabel.classList.toggle("bg-salad", target.checked);
+
+        const taskIndex = storedData.findIndex(item => item.id === taskId);
+        storedData[taskIndex].done = target.checked;
+        localStorage.setItem("storedData", JSON.stringify(storedData));
     }
-
-    const taskIndex = storedData.findIndex(item => item.id === taskId);
-    storedData[taskIndex].done = target.checked;
-    localStorage.setItem("storedData", JSON.stringify(storedData));
 });
 
 document.querySelectorAll(".importance-btn").forEach((btn) => {
     btn.addEventListener("click", function (event) {
         importance.textContent = event.target.textContent.trim();
     });
-});
-
-document.querySelector("#clearStorage").addEventListener("click", function () {
-    localStorage.clear();
-    window.location.reload();
 });
