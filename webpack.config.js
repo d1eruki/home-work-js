@@ -1,6 +1,8 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
     entry: './src/js/script.js',
@@ -15,6 +17,11 @@ module.exports = {
         open: false,
     },
     mode: 'production',
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.esm-bundler.js'
+        }
+    },
     module: {
         rules: [
             {
@@ -32,9 +39,14 @@ module.exports = {
                     'css-loader',
                 ],
             },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
         ],
     },
     plugins: [
+        new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
             filename: 'index.html',
@@ -43,6 +55,11 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'style.css',
         }),
+        new webpack.DefinePlugin({
+            __VUE_OPTIONS_API__: true,
+            __VUE_PROD_DEVTOOLS__: false,
+            __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false
+        })
     ],
     ignoreWarnings: [/node_modules/]
 };

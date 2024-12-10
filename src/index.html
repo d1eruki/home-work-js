@@ -6,7 +6,7 @@
     <title>✏️ To Do List</title>
 </head>
 <body>
-<div class="container d-flex vh-100 flex-column justify-content-between py-5">
+<div class="container d-flex vh-100 flex-column justify-content-between py-5" id="app">
     <div class="d-flex flex-column gap-1 rounded-lg h-100">
         <h1 class="font-weight-bold">
             ✏️ To Do List
@@ -15,6 +15,11 @@
             Добавь сюда пару делишек, что бы организовать свой день, братишка!
         </p>
         <div id="toDoOutput"></div>
+        <div>
+            <h1>счетчик: {{ counter }}</h1>
+            <button>+</button>
+            <button>-</button>
+        </div>
     </div>
     <div class="input-group">
         <div class="input-group-prepend">
